@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Input from "./Input";
+import Drop from "./Drop";
+import TextArea from "./TextArea";
+import Button from "./Button";
 
 const EditProfile = ({ profile, onClose, onSave }) => {
   const [formData, setFormData] = useState(profile);
@@ -24,7 +27,7 @@ const EditProfile = ({ profile, onClose, onSave }) => {
       animate={{ x: 0 }}
       exit={{ x: "100%" }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 right-0 lg:w-1/2 w-11/12 h-full bg-border text-white flex flex-col justify-start items-start gap-7 py-16 lg:px-7 px-4 shadow-lg  z-50"
+      className="fixed top-0 right-0 lg:w-1/2 w-11/12 h-full overflow-scroll-hide bg-border text-white flex flex-col overflow-y-scroll scrollbar-hide justify-start items-start gap-7 py-10 lg:px-7 px-4 shadow-lg  z-50"
     >
       <div className="flex justify-between items-center w-full">
         <h1 className="text-white font-amiri font-semibold text-lg">
@@ -81,26 +84,96 @@ const EditProfile = ({ profile, onClose, onSave }) => {
           onChange={handleChange}
           name="software"
         />
+        <Input
+          html="tags"
+          title="Tags"
+          value={formData.tags}
+          type="text"
+          placeholder="Tags"
+          onChange={handleChange}
+          name="tags"
+        />
+        <Drop
+          html="experience"
+          title="Experience Level"
+          value={formData.experience}
+          placeholder="Pick your Level"
+          onChange={handleChange}
+          name="experience"
+          opt1="Beginner"
+          opt2="Associate"
+          opt3="Expert"
+        />
+        <Drop
+          html="city"
+          title="City"
+          value={formData.city}
+          placeholder="Pick your City"
+          onChange={handleChange}
+          name="city"
+          opt1="Tirunelveli"
+          opt2="Tenkasi"
+          opt3="Tuticorin"
+        />
 
-        <div className="col-span-2">
-          <label className="block mb-2">Profile Image</label>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
+        <Drop
+          html="availability"
+          title="Pick your Availability"
+          value={formData.availability}
+          placeholder="Pick your City"
+          onChange={handleChange}
+          name="availability"
+          opt1="Work from Home"
+          opt2="Work from Office"
+          opt3="Hybrid"
+        />
+
+        <div className="flex gap-3 justify-start items-start flex-col  lg:w-[400px] w-full">
+          <label className="w-full font-publicSans text-white text-sm font-medium">
+            Upload a Profile Image
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="block w-full text-sm text-textShade
+             file:mr-4 file:py-4 file:px-5
+             file:rounded-full file:border-0
+             file:text-sm file:font-semibold file:font-amiri
+             file:bg-greeny file:text-font
+             hover:file:bg-lime-400"
+          />
         </div>
+
+        <TextArea
+          html="overview"
+          title="Overview"
+          name="overview"
+          value={formData.overview}
+          onChange={handleChange}
+        />
+        <TextArea
+          html="about"
+          title="About Me"
+          name="about"
+          value={formData.about}
+          onChange={handleChange}
+        />
       </div>
 
-      <div className="flex justify-between mt-6">
-        <button
-          onClick={onClose}
-          className="px-6 py-2 bg-gray-600 rounded hover:bg-gray-500"
-        >
-          Close
-        </button>
-        <button
-          onClick={() => onSave(formData)}
-          className="px-6 py-2 bg-lime-500 text-black rounded hover:bg-lime-400"
-        >
-          Save
-        </button>
+      <div className="flex justify-end items-center gap-6 w-full mt-6">
+        <Button
+          handleClick={onClose}
+          name="Close"
+          bgColor="bg-border"
+          stroke={true}
+        />
+        <Button
+          handleClick={() => onSave(formData)}
+          name="Save"
+          bgColor="bg-green-gradient"
+          text="text-font"
+        />
       </div>
     </motion.div>
   );

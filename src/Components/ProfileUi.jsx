@@ -86,7 +86,7 @@ const ProfileUi = ({ profile }) => {
               About Me
             </p>
             <h1 className="w-full font-medium text-white font-publicSans text-lg">
-              {profile.overview}
+              {profile.about}
             </h1>
           </div>
         </div>
